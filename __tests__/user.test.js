@@ -22,4 +22,23 @@ describe('user auth routes', () => {
       email: 'test@test.com'
     });
   });
+
+  it('logs in a user via POST', async() => {
+    const user = await UserService.create({
+      email: 'test@test.com',
+      password: 'password'
+    });
+
+    const response = await request(app)
+      .post('/api/v1/auth/login')
+      .send({
+        email: 'test@test.com',
+        password: 'password'
+      });
+
+    expect(response.body).toEqual({
+      id: user.id,
+      email: 'test@test.com'
+    });
+  });
 });

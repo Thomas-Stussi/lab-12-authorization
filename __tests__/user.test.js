@@ -14,18 +14,21 @@ describe('user auth routes', () => {
       .post('/api/v1/auth/signup')
       .send({
         email: 'test@test.com',
+        profile: 'test',
         password: 'password'
       });
 
     expect(response.body).toEqual({
       id: expect.any(String),
-      email: 'test@test.com'
+      email: 'test@test.com',
+      profile: 'test'
     });
   });
 
   it('logs in a user via POST', async () => {
     const user = await UserService.create({
       email: 'test@test.com',
+      profile: 'test',
       password: 'password'
     });
 
@@ -38,7 +41,8 @@ describe('user auth routes', () => {
 
     expect(response.body).toEqual({
       id: user.id,
-      email: 'test@test.com'
+      email: 'test@test.com',
+      profile: 'test'
     });
   });
 
@@ -48,6 +52,7 @@ describe('user auth routes', () => {
       .post('/api/v1/auth/signup')
       .send({
         email: 'test@test.com',
+        profile: 'test',
         password: 'password'
       })
 
@@ -56,7 +61,8 @@ describe('user auth routes', () => {
 
     expect(response.body).toEqual({
       id: expect.any(String),
-      email: 'test@test.com'
+      email: 'test@test.com',
+      profile: 'test'
     })
 
     const responseWithoutAUser = await request(app)

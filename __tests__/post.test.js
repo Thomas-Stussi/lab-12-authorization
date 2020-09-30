@@ -53,16 +53,29 @@ describe('posts routes', () => {
     })
   })
 
-  it('deletes a post by id via DELETE', async() => {
+  it('deletes a post by id via DELETE', async () => {
     const response = await getAgent()
       .delete('/api/v1/posts/1')
 
-      expect(response.body).toEqual({
-        id: '1',
-        photo: expect.any(String),
-        tags: expect.any(Array),
-        userId: expect.any(String),
-        caption: expect.any(String)
-      })
+    expect(response.body).toEqual({
+      id: '1',
+      photo: expect.any(String),
+      tags: expect.any(Array),
+      userId: expect.any(String),
+      caption: expect.any(String)
+    })
   })
+
+  // it('gets the 10 most commented posts via GET', async() => {
+  //   const response = await getAgent()
+  //     .get('/api/v1/posts/popular')
+
+  //     expect(response.body).toContainEqual({
+  //       id: expect.any(String),
+  //       photo: expect.any(String),
+  //       tags: expect.any(Array),
+  //       userId: expect.any(String),
+  //       caption: expect.any(String)
+  //     })
+  // })
 });

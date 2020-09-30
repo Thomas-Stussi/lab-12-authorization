@@ -3,14 +3,11 @@ const pool = require('../lib/utils/pool');
 const request = require('supertest');
 const app = require('../lib/app');
 const UserService = require('../lib/services/user-service');
+const { getAgent } = require('../data/data-helpers');
 
 describe('user auth routes', () => {
-  beforeEach(() => {
-    return pool.query(fs.readFileSync('./sql/setup.sql', 'utf-8'))
-  });
-
   it('signup a user via POST', async () => {
-    const response = await request(app)
+    const response = await getAgent()
       .post('/api/v1/auth/signup')
       .send({
         email: 'test@test.com',
